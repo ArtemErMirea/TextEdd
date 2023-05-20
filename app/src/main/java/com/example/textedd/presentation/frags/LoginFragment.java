@@ -15,7 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.example.textedd.LoginContract;
+import com.example.textedd.shared.contracts.LoginContract;
 import com.example.textedd.R;
 
 import com.example.textedd.domain.LoginPresenter;

@@ -38,13 +38,13 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.textedd.MainContract;
-import com.example.textedd.MarkwonET;
+import com.example.textedd.shared.contracts.MainContract;
+import com.example.textedd.shared.markwon.MarkwonET;
 import com.example.textedd.R;
-import com.example.textedd.TagsOfNote_Adapter;
+import com.example.textedd.shared.adapters.TagsOfNote_Adapter;
 import com.example.textedd.domain.NotePresenter;
 import com.example.textedd.presentation.MainActivity;
-import com.example.textedd.shared.LinksAdapter;
+import com.example.textedd.shared.adapters.LinksAdapter;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 

@@ -2,9 +2,9 @@ package com.example.textedd.domain;
 
 import android.content.Context;
 
-import com.example.textedd.MainContract;
+import com.example.textedd.shared.contracts.MainContract;
 import com.example.textedd.data.Repository;
-import com.example.textedd.shared.CatalogContract;
+import com.example.textedd.shared.contracts.CatalogContract;
 
 import java.io.File;
 import java.util.ArrayList;

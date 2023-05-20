@@ -5,7 +5,7 @@ import android.text.SpannableStringBuilder;
 import android.util.Log;
 import android.widget.TextView;
 
-import com.example.textedd.MainContract;
+import com.example.textedd.shared.contracts.MainContract;
 import com.example.textedd.data.Repository;
 
 import java.util.ArrayList;

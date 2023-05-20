@@ -2,7 +2,7 @@ package com.example.textedd.domain;
 
 import android.content.Context;
 
-import com.example.textedd.LoginContract;
+import com.example.textedd.shared.contracts.LoginContract;
 import com.example.textedd.data.Repository;
 
 public class LoginPresenter implements LoginContract.Presenter {

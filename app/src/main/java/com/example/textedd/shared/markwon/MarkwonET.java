@@ -1,4 +1,4 @@
-package com.example.textedd;
+package com.example.textedd.shared.markwon;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -10,11 +10,11 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.textedd.shared.BlockQuoteEditHandler;
-import com.example.textedd.shared.CodeEditHandler;
-import com.example.textedd.shared.HeadingEditHandler;
-import com.example.textedd.shared.LinkEditHandler;
-import com.example.textedd.shared.StrikethroughEditHandler;
+import com.example.textedd.shared.markwon.handlers.BlockQuoteEditHandler;
+import com.example.textedd.shared.markwon.handlers.CodeEditHandler;
+import com.example.textedd.shared.markwon.handlers.HeadingEditHandler;
+import com.example.textedd.shared.markwon.handlers.LinkEditHandler;
+import com.example.textedd.shared.markwon.handlers.StrikethroughEditHandler;
 
 import org.commonmark.node.CustomNode;
 import org.commonmark.node.Node;

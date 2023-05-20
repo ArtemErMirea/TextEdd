@@ -29,11 +29,11 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.textedd.NoteAdapter;
+import com.example.textedd.shared.adapters.NoteAdapter;
 import com.example.textedd.R;
 import com.example.textedd.domain.CatalogPresenter;
 import com.example.textedd.presentation.MainActivity;
-import com.example.textedd.shared.CatalogContract;
+import com.example.textedd.shared.contracts.CatalogContract;
 
 import java.io.File;
 import java.util.ArrayList;

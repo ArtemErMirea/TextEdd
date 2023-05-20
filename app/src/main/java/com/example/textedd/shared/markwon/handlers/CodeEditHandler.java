@@ -1,4 +1,4 @@
-package com.example.textedd.shared;
+package com.example.textedd.shared.markwon.handlers;
 
 import android.text.Editable;
 import android.text.Spanned;

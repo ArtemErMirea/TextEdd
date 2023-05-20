@@ -1,4 +1,4 @@
-package com.example.textedd;
+package com.example.textedd.shared.adapters;
 
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.textedd.R;
 
 import java.io.File;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.example.textedd.shared;
+package com.example.textedd.shared.adapters;
 
 import android.annotation.SuppressLint;
 import android.view.LayoutInflater;

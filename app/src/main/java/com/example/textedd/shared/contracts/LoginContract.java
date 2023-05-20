@@ -1,4 +1,4 @@
-package com.example.textedd;
+package com.example.textedd.shared.contracts;
 
 import android.content.Context;
 

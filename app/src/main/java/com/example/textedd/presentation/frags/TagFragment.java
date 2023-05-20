@@ -38,12 +38,12 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.textedd.MainContract;
-import com.example.textedd.MarkwonET;
+import com.example.textedd.shared.contracts.MainContract;
+import com.example.textedd.shared.markwon.MarkwonET;
 import com.example.textedd.R;
 import com.example.textedd.domain.NotePresenter;
 import com.example.textedd.presentation.MainActivity;
-import com.example.textedd.shared.LinksAdapter;
+import com.example.textedd.shared.adapters.LinksAdapter;
 
 import java.util.ArrayList;
 import java.util.Collections;

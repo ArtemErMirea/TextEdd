@@ -4,7 +4,7 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.textedd.MainContract;
+import com.example.textedd.shared.contracts.MainContract;
 
 import java.io.BufferedReader;
 import java.io.File;
