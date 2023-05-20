@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_graph"
+    app:startDestination="@id/loginFragment">
+
+    <fragment android:id="@+id/noteFragment"
+        android:name="com.example.textedd.presentation.frags.NoteFragment"
+        tools:layout="@layout/fragment_note">
+        <action
+            android:id="@+id/action_noteFragment_to_catalogFragment2"
+            app:destination="@id/catalogFragment" />
+        <action
+            android:id="@+id/action_noteFragment_self"
+            app:destination="@id/noteFragment" />
+        <action
+            android:id="@+id/action_noteFragment_to_tag_frag"
+            app:destination="@id/tag_frag" />
+    </fragment>
+    <fragment
+        android:id="@+id/catalogFragment"
+        android:name="com.example.textedd.presentation.frags.CatalogFragment"
+        android:label="@string/createdNotes" >
+        <action
+            android:id="@+id/action_catalogFragment_to_noteFragment"
+            app:destination="@id/noteFragment" />
+        <action
+            android:id="@+id/action_catalogFragment_to_tag_frag"
+            app:destination="@id/tag_frag" />
+    </fragment>
+    <fragment
+        android:id="@+id/tag_frag"
+        android:name="com.example.textedd.presentation.frags.TagFragment"
+        android:label="fragment_tag"
+        tools:layout="@layout/fragment_tag" >
+        <action
+            android:id="@+id/action_tag_frag_to_noteFragment"
+            app:destination="@id/noteFragment" />
+        <action
+            android:id="@+id/action_tag_frag_to_catalogFragment"
+            app:destination="@id/catalogFragment" />
+        <action
+            android:id="@+id/action_tag_frag_self"
+            app:destination="@id/tag_frag" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.textedd.presentation.frags.LoginFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_catalogFragment"
+            app:destination="@id/catalogFragment" />
+    </fragment>
+
+
+</navigation>

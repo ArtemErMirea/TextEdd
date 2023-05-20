@@ -7,4 +7,13 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="colorAccent">#F44336</color>
+    <color name="mbdtf_red">#F24150</color>
+    <color name="mbdtf_raspberry">#F24162</color>
+    <color name="mbdtf_mint">#50F2B7</color>
+    <color name="mbdtf_teal">#49A684</color>
+    <color name="mbdtf_golden">#E9CE5B</color>
+    <color name="mbdtf_green">#49BF66</color>
+    <color name="mbdtf_coral">#F6575C</color>
+
 </resources>

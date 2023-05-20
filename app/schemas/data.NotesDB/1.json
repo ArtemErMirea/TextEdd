@@ -1,0 +1,102 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "7750dad2e9eaec2c1e179d81492a218f",
+    "entities": [
+      {
+        "tableName": "Notes",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`fileName` TEXT NOT NULL, `directory` TEXT, `creationTime` INTEGER NOT NULL, `links` TEXT, `tags` TEXT, PRIMARY KEY(`fileName`))",
+        "fields": [
+          {
+            "fieldPath": "fileName",
+            "columnName": "fileName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "directory",
+            "columnName": "directory",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "creationTime",
+            "columnName": "creationTime",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "links",
+            "columnName": "links",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "tags",
+            "columnName": "tags",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "fileName"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Tags",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`fileName` TEXT NOT NULL, `directory` TEXT, `creationTime` INTEGER NOT NULL, `links` TEXT, `tags` TEXT, PRIMARY KEY(`fileName`))",
+        "fields": [
+          {
+            "fieldPath": "fileName",
+            "columnName": "fileName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "directory",
+            "columnName": "directory",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "creationTime",
+            "columnName": "creationTime",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "links",
+            "columnName": "links",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "tags",
+            "columnName": "tags",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "fileName"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '7750dad2e9eaec2c1e179d81492a218f')"
+    ]
+  }
+}

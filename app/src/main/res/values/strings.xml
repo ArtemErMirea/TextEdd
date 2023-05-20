@@ -1,9 +1,9 @@
 <resources>
-    <string name="app_name">TextEdd</string>
+    <string name="app_name">Кабинет мыслей</string>
     <string name="editText">Изменить текст</string>
     <string name="action_open">Открыть</string>
     <string name="action_save">Сохранить</string>
-
+    <string name="action_menu">Меню</string>
     <string name="action_settings">Настройки</string>
     <string name="pref_openmode">Режим открытия</string>
     <string name="pref_color">Цвет</string>
@@ -33,5 +33,44 @@
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="enter_note_name">Название заметки:</string>
-    <string name="sample_name"> </string>
+    <string name="sample_name">  </string>
+    <string name="action_delete">Удалить</string>
+    <string name="delete_sure">Удалить файл?</string>
+    <string name="bold">Ж</string>
+    <string name="italic">К</string>
+    <string name="strike_th">~~</string>
+    <string name="quote"><![CDATA[>]]> ц</string>
+    <string name="code_listing">`код`</string>
+    <string name="head_lvl_1">Зг1</string>
+    <string name="head_lvl_2">зг2</string>
+    <string name="createdNotes">Созданные записи:</string>
+    <string name="tag_name">#tag!</string>
+    <string name="add_tag">+тег</string>
+    <string name="bottom_sheet_peek">Ссылки</string>
+    <string name="bottom_sheet_content">content</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="inner_links">Ссылки записи</string>
+    <string name="outher_links">Cсылки на запись</string>
+    <string name="inner_link_name">link!</string>
+
+    <string-array name="sort_vars">
+        <item>По времени создания</item>
+        <item>По алфавиту</item>
+    </string-array>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_username777">Имя пользователя</string>
+    <string name="prompt_password">Password</string>
+    <string name="prompt_password_rus">Пароль</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+
+    <string name="action_sign_in_ru">Вход</string>
+    <string name="action_reg_ru">Регистрация</string>
+
+    <string name="welcome">"Welcome!"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
 </resources>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:orientation="vertical"
+        android:padding="8dip"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:orientation="horizontal"
+            android:text="@string/sample_name"
+            android:textSize="24sp"
+            android:textStyle="normal|bold"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fadeScrollbars="true"
+            android:gravity="top|start"
+            android:hint="@string/editText"
+            android:inputType="textMultiLine"
+            android:maxHeight="948dp"
+            android:minHeight="148dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/heading1"
+                android:layout_width="15dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/head_lvl_1"
+                android:typeface="monospace" />
+
+            <Button
+                android:id="@+id/heading2"
+                android:layout_width="15dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/head_lvl_2"
+                android:typeface="monospace" />
+
+            <Button
+                android:id="@+id/bold"
+                android:layout_width="15dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/bold"
+                android:textStyle="bold"
+                android:typeface="monospace" />
+
+            <Button
+                android:id="@+id/italic"
+                android:layout_width="15dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/italic"
+                android:textStyle="italic"
+                android:typeface="monospace" />
+
+            <Button
+                android:id="@+id/strike"
+                android:layout_width="15dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/strike_th"
+                android:typeface="monospace" />
+
+            <Button
+                android:id="@+id/quote"
+                android:layout_width="15dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/quote"
+                android:typeface="monospace" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
