@@ -26,12 +26,13 @@ import androidx.core.view.MenuProvider;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Lifecycle;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.textedd.shared.adapters.NoteAdapter;
 import com.example.textedd.R;
-import com.example.textedd.domain.CatalogPresenter;
+import com.example.textedd.presenters.CatalogPresenter;
 import com.example.textedd.presentation.MainActivity;
 import com.example.textedd.shared.contracts.CatalogContract;
 
@@ -110,7 +111,7 @@ public class CatalogFragment extends Fragment implements NoteAdapter.OnNoteListe
                                     (dialog, id) -> {
                                         //Вводим текст и получаем имя файла
                                         dialogInput = String.valueOf(userInput.getText());
-                                        String FILENAME = dialogInput + ".md";
+                                        String FILENAME = mPresenter.addFileExtensions(dialogInput);
                                         //textView.setText(dialogInput);
                                         mPresenter.findNoteOrTag(context, FILENAME);
                                         dialog.cancel();
@@ -146,6 +147,8 @@ public class CatalogFragment extends Fragment implements NoteAdapter.OnNoteListe
         textFiles = mPresenter.getAllFilesList(context, textFiles);
         adapter = new NoteAdapter(textFiles, this);
         mRecyclerView.setAdapter(adapter);
+        DividerItemDecoration DividerItemDecorationH = new DividerItemDecoration(mRecyclerView.getContext(), DividerItemDecoration.VERTICAL);
+        mRecyclerView.addItemDecoration(DividerItemDecorationH);
         // Получаем экземпляр элемента Spinner
         Spinner spinner = view.findViewById(R.id.spinner4);
 

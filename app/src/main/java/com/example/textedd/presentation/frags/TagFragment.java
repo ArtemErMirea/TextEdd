@@ -41,7 +41,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.textedd.shared.contracts.MainContract;
 import com.example.textedd.shared.markwon.MarkwonET;
 import com.example.textedd.R;
-import com.example.textedd.domain.NotePresenter;
+import com.example.textedd.presenters.NotePresenter;
 import com.example.textedd.presentation.MainActivity;
 import com.example.textedd.shared.adapters.LinksAdapter;
 
@@ -69,22 +69,15 @@ public class TagFragment extends Fragment implements MainContract.View, MenuProv
 
     private static String filename = "sampleTag.md"; // имя файла
     private EditText mEditText;
-    MenuItem item;
 
     private MainContract.Presenter mPresenter;
-
-    private Button bold, italic, strike, quote, code, head1, head2, tagButton;
     private RecyclerView linksRecyclerView;
     private List<String> links_list = new ArrayList();
     private LinksAdapter linkAdapter;
-    //Для диалогового окна
     Context context;
 
     private boolean sortABC;
     private boolean sortOrderReverse;
-
-    //private Button button;
-    //private TextView textView;
 
     public TagFragment() {
         // Required empty public constructor
@@ -99,12 +92,6 @@ public class TagFragment extends Fragment implements MainContract.View, MenuProv
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = requireActivity().getApplicationContext();
-        assert getArguments() != null;
-        String arg = getArguments().getString("fn"); //получить bundle и использовать его содержимое
-        if(arg != null && !arg.isEmpty()){
-            filename = arg;
-        }
-        Log.d(TAG, "Tag Got the bundle " + filename);
         mPresenter = new NotePresenter(this);
         //Создаём Presenter и в аргументе передаём ему this -
         // эта Activity расширяет интерфейс MainContract.View
@@ -121,22 +108,25 @@ public class TagFragment extends Fragment implements MainContract.View, MenuProv
     @SuppressLint({"ClickableViewAccessibility", "CutPasteId"})
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         Log.d(TAG, "Tag View Was Created");
-
+        assert getArguments() != null;
+        String arg = getArguments().getString("fn"); //получить bundle и использовать его содержимое
+        if(arg != null && !arg.isEmpty()){
+            filename = arg;
+        }
+        Log.d(TAG, "Tag Got the bundle " + filename);
         super.onViewCreated(view, savedInstanceState);
         mView = view;
         MenuHost menuHost = requireActivity();
         menuHost.addMenuProvider(this, getViewLifecycleOwner(), Lifecycle.State.RESUMED);
 
-        //context = getActivity().getApplicationContext();
-
         //Инициализируем элементы:
         mEditText = view.findViewById(R.id.editText);
-        head1 = (Button) view.findViewById(R.id.heading1);
-        head2 = (Button) view.findViewById(R.id.heading2);
-        bold = (Button) view.findViewById(R.id.bold);
-        italic = (Button) view.findViewById(R.id.italic);
-        strike = (Button) view.findViewById(R.id.strike);
-        quote = (Button) view.findViewById(R.id.quote);
+        Button head1 = (Button) view.findViewById(R.id.heading1);
+        Button head2 = (Button) view.findViewById(R.id.heading2);
+        Button bold = (Button) view.findViewById(R.id.bold);
+        Button italic = (Button) view.findViewById(R.id.italic);
+        Button strike = (Button) view.findViewById(R.id.strike);
+        Button quote = (Button) view.findViewById(R.id.quote);
         //code = (Button) view.findViewById(R.id.code);
         mEditText.setScroller(new Scroller(context));
         mEditText.setMaxLines(12);
@@ -151,14 +141,6 @@ public class TagFragment extends Fragment implements MainContract.View, MenuProv
             }
             return false;
         });
-        /*
-        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-        toolbar.inflateMenu(R.menu.menu_main);
-        Menu menu = toolbar.getMenu(); */
-
-
-        //LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
-
 
         this.addSpan(bold, new StrongEmphasisSpan());
         this.addSpan(italic, new EmphasisSpan());
@@ -268,7 +250,7 @@ public class TagFragment extends Fragment implements MainContract.View, MenuProv
                                     (dialog, id) -> {
                                         //Вводим текст и получаем имя файла
                                         String dialogInput = String.valueOf(userInput.getText());
-                                        String filename = dialogInput + ".md";
+                                        String filename = mPresenter.addFileExtensions(dialogInput);
                                         //textView.setText(dialogInput);
                                         mPresenter.findNoteOrTag(context, filename);
                                         //mPresenter.presentNoteContent(context, filename);
@@ -342,7 +324,8 @@ public class TagFragment extends Fragment implements MainContract.View, MenuProv
         filename = fileName;
         Markwon markwon = Markwon.create(context);
         //textView.setText(fileName);
-        Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).setTitle(filename); //Уставаливаем имя записи в экшнбаре
+        Objects.requireNonNull(((AppCompatActivity) requireActivity()).
+                getSupportActionBar()).setTitle(filename); //Уставаливаем имя записи в экшнбаре
         MarkwonEditor editor = MarkwonEditor.create(markwon);
         mEditText.addTextChangedListener(MarkwonEditorTextWatcher.withPreRender(
                 editor,
@@ -379,9 +362,6 @@ public class TagFragment extends Fragment implements MainContract.View, MenuProv
         @SuppressLint("SetTextI18n")
         @Override
         public boolean onLinkLongClick(int position) {
-            Toast.makeText(context.getApplicationContext(),
-                    links_list.get(position) + "Long Pressed",
-                    Toast.LENGTH_LONG).show();
             Log.d(TAG, "|" + links_list.get(position) + "|Long Pressed");
             try {
                 LayoutInflater lif = LayoutInflater.from(context);
@@ -426,13 +406,11 @@ public class TagFragment extends Fragment implements MainContract.View, MenuProv
         TagFragment.OnLinkListener onLinkListener = new TagFragment.OnLinkListener();
         linkAdapter = new LinksAdapter(links_list, onLinkListener);
         linksRecyclerView.setAdapter(linkAdapter);
-        DividerItemDecoration dividerItemDecorationH =
-                new DividerItemDecoration(linksRecyclerView.getContext(),
-                        DividerItemDecoration.HORIZONTAL);
+        //DividerItemDecoration dividerItemDecorationH = new DividerItemDecoration(linksRecyclerView.getContext(), DividerItemDecoration.HORIZONTAL);
         DividerItemDecoration dividerItemDecorationV =
                 new DividerItemDecoration(linksRecyclerView.getContext(),
                         DividerItemDecoration.VERTICAL);
-        linksRecyclerView.addItemDecoration(dividerItemDecorationH);
+        //linksRecyclerView.addItemDecoration(dividerItemDecorationH);
         linksRecyclerView.addItemDecoration(dividerItemDecorationV);
     }
 

@@ -34,6 +34,10 @@ public interface MainContract {
 
         List<String> suggestLinks(Context context);
 
+        String removeFileExtensions(String fileName);
+
+        String addFileExtensions(String fileName);
+
         void deleteNote(Context context, String filename);
 
         void deleteTag(Context context, String tagName);

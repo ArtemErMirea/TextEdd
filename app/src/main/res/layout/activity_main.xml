@@ -9,7 +9,8 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints">
+        tools:ignore="MissingConstraints"
+        android:background="?attr/colorPrimary">
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_height="wrap_content"

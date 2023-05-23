@@ -5,8 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.text.SpannableStringBuilder;
 import android.text.method.ScrollingMovementMethod;
 import android.text.style.StrikethroughSpan;
 import android.util.Log;
@@ -38,13 +37,13 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.textedd.shared.contracts.MainContract;
-import com.example.textedd.shared.markwon.MarkwonET;
 import com.example.textedd.R;
-import com.example.textedd.shared.adapters.TagsOfNote_Adapter;
-import com.example.textedd.domain.NotePresenter;
+import com.example.textedd.presenters.NotePresenter;
 import com.example.textedd.presentation.MainActivity;
 import com.example.textedd.shared.adapters.LinksAdapter;
+import com.example.textedd.shared.adapters.TagsOfNote_Adapter;
+import com.example.textedd.shared.contracts.MainContract;
+import com.example.textedd.shared.markwon.MarkwonET;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -67,17 +66,12 @@ import io.noties.markwon.editor.MarkwonEditorTextWatcher;
 public class NoteFragment extends Fragment implements MainContract.View, MenuProvider {
     private static final String TAG = "NoteFragment";
 
-
-
     private View mView;
 
     private static String filename = "sample.md"; // имя файла
     private EditText mEditText;
-    MenuItem item;
-
     private MainContract.Presenter mPresenter;
 
-    private Button bold, italic, strike, quote, code, head1, head2, tagButton;
     private RecyclerView tagRecyclerView, linksRecyclerView, backLinkRecyclerView;
     private List<String> tag_list = new ArrayList();
     private List<String> links_list = new ArrayList();
@@ -113,25 +107,18 @@ public class NoteFragment extends Fragment implements MainContract.View, MenuPro
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = requireActivity().getApplicationContext();
+        //Создаём Presenter и в аргументе передаём ему this -
+        // эта Activity расширяет интерфейс MainContract.View
+        mPresenter = new NotePresenter(this);
         Log.d(TAG, "Note Fragment Was Created");
-        //setHasOptionsMenu(true);
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {// Inflate the layout for this fragment
-        assert getArguments() != null;
-        String arg = getArguments().getString("fn"); //получить bundle и использовать его содержимое
-        if(arg != null && !arg.isEmpty()){
-            filename = arg;
-        }
-        Log.d(TAG, "Note Got the bundle " + filename);
         context = requireActivity().getApplicationContext();
         pref = PreferenceManager.getDefaultSharedPreferences(context);
-        mPresenter = new NotePresenter(this);
         Log.d(TAG, "Note View Create");
-        //setHasOptionsMenu(true);
         return inflater.inflate(R.layout.fragment_note, container, false);
 
     }
@@ -147,19 +134,25 @@ public class NoteFragment extends Fragment implements MainContract.View, MenuPro
     @SuppressLint("ClickableViewAccessibility")
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
         Log.d(TAG, "Note View Was Created");
+        assert getArguments() != null;
+        String arg = getArguments().getString("fn"); //получить bundle и использовать его содержимое
+        if(arg != null && !arg.isEmpty()){
+            filename = arg;
+        }
+        Log.d(TAG, "Note Got the bundle " + filename);
         super.onViewCreated(view, savedInstanceState);
         mView = view;
         MenuHost menuHost = requireActivity();
         menuHost.addMenuProvider(this, getViewLifecycleOwner(), Lifecycle.State.RESUMED);
-        //Создаём Presenter и в аргументе передаём ему this - эта Activity расширяет интерфейс MainContract.View
+
         //Инициализируем элементы:
         mEditText = view.findViewById(R.id.editText);
-        head1 = (Button) view.findViewById(R.id.heading1);
-        head2 = (Button) view.findViewById(R.id.heading2);
-        bold = (Button) view.findViewById(R.id.bold);
-        italic = (Button) view.findViewById(R.id.italic);
-        strike = (Button) view.findViewById(R.id.strike);
-        quote = (Button) view.findViewById(R.id.quote);
+        Button head1 = (Button) view.findViewById(R.id.heading1);
+        Button head2 = (Button) view.findViewById(R.id.heading2);
+        Button bold = (Button) view.findViewById(R.id.bold);
+        Button italic = (Button) view.findViewById(R.id.italic);
+        Button strike = (Button) view.findViewById(R.id.strike);
+        Button quote = (Button) view.findViewById(R.id.quote);
         //code = (Button) view.findViewById(R.id.code);
         mEditText.setScroller(new Scroller(context));
         mEditText.setMaxLines(12);
@@ -177,9 +170,9 @@ public class NoteFragment extends Fragment implements MainContract.View, MenuPro
         LinearLayoutManager horizontalLayoutManager =
                 new LinearLayoutManager(context,
                         LinearLayoutManager.HORIZONTAL, false);
-        this.mPresenter.addSpan(bold, new StrongEmphasisSpan());
-        this.mPresenter.addSpan(italic, new EmphasisSpan());
-        this.mPresenter.addSpan(strike, new StrikethroughSpan());
+        this.addSpan(bold, new StrongEmphasisSpan());
+        this.addSpan(italic, new EmphasisSpan());
+        this.addSpan(strike, new StrikethroughSpan());
 
         head1.setOnClickListener(new MarkwonET.InsertOrWrapClickListener(mEditText, "# "));
         head2.setOnClickListener(new MarkwonET.InsertOrWrapClickListener(mEditText, "## "));
@@ -210,6 +203,8 @@ public class NoteFragment extends Fragment implements MainContract.View, MenuPro
             }
         }));
 
+        //MarkwonET.render(context, mEditText);
+        /*
         mEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -227,6 +222,8 @@ public class NoteFragment extends Fragment implements MainContract.View, MenuPro
 
             }
         });
+
+         */
         textView = (TextView) view.findViewById(R.id.textView);
 
         tagRecyclerView = view.findViewById(R.id.recyclerView);
@@ -239,9 +236,9 @@ public class NoteFragment extends Fragment implements MainContract.View, MenuPro
         backLinkRecyclerView.setLayoutManager(new LinearLayoutManager(context));
 
         mPresenter.presentNoteContent(context, filename);
-        MarkwonET.render(context, mEditText);
 
-        tagButton = view.findViewById(R.id.new_tag_butt);
+
+        Button tagButton = view.findViewById(R.id.new_tag_butt);
         View.OnClickListener tbListener = v -> {
             try {
                 //Получаем вид с файла prompt.xml, который применим для диалогового окна:
@@ -394,6 +391,7 @@ public class NoteFragment extends Fragment implements MainContract.View, MenuPro
                 }
             }
         });
+        MarkwonET.render(context, mEditText);
     }
 
 
@@ -410,7 +408,8 @@ public class NoteFragment extends Fragment implements MainContract.View, MenuPro
         filename = fileName;
         Markwon markwon = Markwon.create(context);
         //textView.setText(fileName);
-        Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).setTitle(filename); //Уставаливаем имя записи в экшнбаре
+        Objects.requireNonNull(((AppCompatActivity) requireActivity()).
+                getSupportActionBar()).setTitle(filename); //Уставаливаем имя записи в экшнбаре
         MarkwonEditor editor = MarkwonEditor.create(markwon);
         mEditText.addTextChangedListener(MarkwonEditorTextWatcher.withPreRender(
                 editor,
@@ -448,7 +447,7 @@ public class NoteFragment extends Fragment implements MainContract.View, MenuPro
                                         //Вводим текст и получаем имя файла
                                         String dialogInput = String.valueOf(userInput.getText());
                                         if (!dialogInput.isEmpty()) {
-                                            String filename = dialogInput + ".md";
+                                            String filename = mPresenter.addFileExtensions(dialogInput);
                                             mPresenter.findNoteOrTag(context, filename);}
                                         dialog.cancel();
                                     })
@@ -518,11 +517,7 @@ public class NoteFragment extends Fragment implements MainContract.View, MenuPro
     public class OnTagListener implements TagsOfNote_Adapter.OnTagListener {
         @Override
         public void onTagClick(int position) {
-            Toast.makeText(context.getApplicationContext(),
-                    tag_list.get(position),
-                    Toast.LENGTH_LONG).show();
             Log.d(TAG, "|" + tag_list.get(position) + "|Clicked");
-
             openTag(tag_list.get(position));
         }
 
@@ -531,9 +526,6 @@ public class NoteFragment extends Fragment implements MainContract.View, MenuPro
         public boolean onTagLongClick(int position) {
             // Handle long click
             // Return true to indicate the click was handled
-            Toast.makeText(context.getApplicationContext(),
-                    tag_list.get(position) + "Long Pressed",
-                    Toast.LENGTH_LONG).show();
             Log.d(TAG, "|" + tag_list.get(position) + "|Long Pressed");
             try {
                 LayoutInflater lif = LayoutInflater.from(context);
@@ -576,10 +568,9 @@ public class NoteFragment extends Fragment implements MainContract.View, MenuPro
         tagRecyclerView.setAdapter(tagAdapter);
         DividerItemDecoration dividerItemDecorationH = new DividerItemDecoration(tagRecyclerView.getContext(),
                 DividerItemDecoration.HORIZONTAL);
-        DividerItemDecoration dividerItemDecorationV = new DividerItemDecoration(tagRecyclerView.getContext(),
-                DividerItemDecoration.VERTICAL);
+        //DividerItemDecoration dividerItemDecorationV = new DividerItemDecoration(tagRecyclerView.getContext(), DividerItemDecoration.VERTICAL);
         tagRecyclerView.addItemDecoration(dividerItemDecorationH);
-        tagRecyclerView.addItemDecoration(dividerItemDecorationV);
+        //tagRecyclerView.addItemDecoration(dividerItemDecorationV);
         Log.d(TAG, "Tag_RV_was_created");
 
 
@@ -622,13 +613,11 @@ public class NoteFragment extends Fragment implements MainContract.View, MenuPro
         OnBackLinkListener onBackLinkListener = new OnBackLinkListener();
         backLinkAdapter = new LinksAdapter(b_links_list, onBackLinkListener);
         backLinkRecyclerView.setAdapter(backLinkAdapter);
-        DividerItemDecoration backDividerItemDecorationH =
-                new DividerItemDecoration(backLinkRecyclerView.getContext(),
-                        DividerItemDecoration.HORIZONTAL);
+        //DividerItemDecoration backDividerItemDecorationH = new DividerItemDecoration(backLinkRecyclerView.getContext(), DividerItemDecoration.HORIZONTAL);
         DividerItemDecoration backDividerItemDecorationV =
                 new DividerItemDecoration(backLinkRecyclerView.getContext(),
                         DividerItemDecoration.VERTICAL);
-        backLinkRecyclerView.addItemDecoration(backDividerItemDecorationH);
+        //backLinkRecyclerView.addItemDecoration(backDividerItemDecorationH);
         backLinkRecyclerView.addItemDecoration(backDividerItemDecorationV);
     }
 
@@ -683,9 +672,6 @@ public class NoteFragment extends Fragment implements MainContract.View, MenuPro
         }
         @Override
         public boolean onLinkLongClick(int position) {
-            Toast.makeText(context.getApplicationContext(),
-                    links_list.get(position) + "Long Pressed",
-                    Toast.LENGTH_LONG).show();
             Log.d(TAG, "|" + links_list.get(position) + "|Long Pressed");
             try {
                 LayoutInflater lif = LayoutInflater.from(context);
@@ -729,5 +715,15 @@ public class NoteFragment extends Fragment implements MainContract.View, MenuPro
         bundle.putString("fn", fileName); //Передача данных между экранами назначения
         Navigation.findNavController(mView).navigate(R.id.action_noteFragment_to_tag_frag, bundle); //Переход к другому экрану
         Log.d(TAG, "Note passes the bundle");
+    }
+
+    public void addSpan(TextView textView, Object... spans) {
+        SpannableStringBuilder builder = new SpannableStringBuilder(textView.getText());
+        int end = builder.length();
+        //int var8 = spans.length;
+        for (Object span : spans) {
+            builder.setSpan(span, 0, end, 33);
+        }
+        textView.setText((CharSequence)builder);
     }
 }

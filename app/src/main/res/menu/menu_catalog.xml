@@ -2,7 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".presentation.NoteActivity">
+    tools:context=".presentation.NoteActivity"
+    android:background="@color/purple_200">
     <item
         android:id="@+id/action_open"
         android:orderInCategory="100"

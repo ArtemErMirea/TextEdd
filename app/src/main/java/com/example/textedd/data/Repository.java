@@ -101,9 +101,9 @@ public class Repository implements MainContract.Repository {
                 NotesDAO notesDAO = db.notesDAO();
                 //File dir = context.getFilesDir();
                 File note = new File(dir, fileName);
+                NoteEntity ne = notesDAO.findNoteById(fileName);
+                if (ne != null) notesDAO.deleteNoteE(ne);
                 if(note.delete()){
-                    NoteEntity ne = notesDAO.findNoteById(fileName);
-                    if (ne != null) notesDAO.deleteNoteE(ne);
                     //Удаляется файл и его метаданные, если они есть;
                     Log.d(TAG, "FileWas " + fileName + " Deleted");
                 }

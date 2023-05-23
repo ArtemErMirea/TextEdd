@@ -37,7 +37,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
     @Override
     public void onBindViewHolder(@NonNull NoteAdapter.NoteHolder holder, int position) {
         File file = textFiles.get(position);
-        holder.textView.setText(file.getName());
+        holder.textView.setText(file.getName().replace(".md", ""));
     }
 
     @Override

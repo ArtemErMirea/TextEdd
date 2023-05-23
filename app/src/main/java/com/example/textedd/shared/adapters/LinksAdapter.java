@@ -34,7 +34,7 @@ public class LinksAdapter extends RecyclerView.Adapter<LinksAdapter.Holder>{
     @Override
     public void onBindViewHolder(@NonNull LinksAdapter.Holder holder, @SuppressLint("RecyclerView") int position) {
         String link= links_list.get(position);
-        holder.textView.setText(link);
+        holder.textView.setText(link.replace(".md", ""));
         holder.textView.setOnClickListener(v -> mOnLinkListener.onLinkClick(position));
         holder.textView.setOnLongClickListener(v -> {
             mOnLinkListener.onLinkLongClick(position);

@@ -5,12 +5,13 @@
     android:id="@+id/bottom_sheet"
     android:layout_width="match_parent"
     android:layout_height="59mm"
-    android:background="@color/mbdtf_teal"
+    android:background="@color/fb_green"
     android:orientation="vertical"
     android:focusable="true"
     app:behavior_hideable="true"
     app:behavior_peekHeight="48dp"
-    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+    tools:ignore="InOrMmUsage">
 
     <TextView
         android:layout_width="match_parent"
@@ -18,7 +19,9 @@
         android:background="@color/purple_700"
         android:gravity="center"
         android:text="@string/bottom_sheet_peek"
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/white"
+        android:textSize="22sp"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,9 +38,11 @@
                 android:id="@+id/inner_links_textView2"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginЫ="48dp"
                 android:gravity="center"
                 android:text="@string/inner_links"
+                android:textStyle="bold"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@+id/recyclerView2"
                 app:layout_constraintEnd_toStartOf="@+id/textView4"
@@ -51,11 +56,11 @@
                 android:id="@+id/textView4"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginEnd="48dp"
                 android:gravity="center"
                 android:text="@string/outher_links"
+                android:textStyle="bold"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@+id/recyclerView3"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -63,15 +68,20 @@
                 app:layout_constraintVertical_bias="0.068" />
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/purple_700" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView2"
                 android:layout_width="200dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
-                android:layout_marginBottom="112dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/recyclerView3"
                 app:layout_constraintHorizontal_bias="0.388"
@@ -80,10 +90,8 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView3"
                 android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
+                android:layout_height="match_parent"
                 android:layout_marginEnd="8dp"
-                android:layout_marginBottom="112dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/recyclerView2" />

@@ -18,7 +18,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.example.textedd.shared.contracts.LoginContract;
 import com.example.textedd.R;
 
-import com.example.textedd.domain.LoginPresenter;
+import com.example.textedd.presenters.LoginPresenter;
 
 public class LoginFragment extends Fragment implements LoginContract.View {
     private static final String TAG = "LoginFragment";
@@ -77,7 +77,6 @@ public class LoginFragment extends Fragment implements LoginContract.View {
     }
     @Override
     public void onRegistrationFailed(){
-        Toast.makeText(requireContext(), "Регистрация не удалась. \n" +
-                "Измените имя пользователя или пароль", Toast.LENGTH_SHORT).show();
+        Toast.makeText(requireContext(), "Регистрация не удалась.", Toast.LENGTH_SHORT).show();
     }
 }

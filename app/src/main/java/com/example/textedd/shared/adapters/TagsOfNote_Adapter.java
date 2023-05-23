@@ -33,7 +33,7 @@ public class TagsOfNote_Adapter extends RecyclerView.Adapter<TagsOfNote_Adapter.
     @Override
     public void onBindViewHolder(@NonNull TagsOfNote_Adapter.Holder holder, final int position) {
         String tag = tag_list.get(position);
-        if (tag != null) holder.textView.setText(tag);
+        if (tag != null) holder.textView.setText(tag.replace(".md", ""));
         holder.itemView.setOnClickListener(itemView -> mOnTagListener.onTagClick(position));
         holder.itemView.setOnLongClickListener(view -> {
             mOnTagListener.onTagLongClick(position);

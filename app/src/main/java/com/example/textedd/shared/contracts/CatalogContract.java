@@ -17,6 +17,10 @@ public interface CatalogContract {
         List<File> getAllFilesList(Context context, List<File> textFiles);
         void createNote(Context context, String fileName);
 
+        String removeFileExtensions(String fileName);
+
+        String addFileExtensions(String fileName);
+
         void createTag(Context context, String fileName);
 
         void findNoteOrTag(Context context, String tagFileName);
